@@ -1,7 +1,6 @@
 const body = document.getElementsByTagName("body");
 const root = document.getElementById('root');
 const mainContainer = document.getElementById('mainContainer');
-const xhr = new XMLHttpRequest();
 // 태그 생성 함수
 function CreateTag(tagname) {
   let element = document.createElement(tagname);
@@ -54,85 +53,19 @@ const _URL2 = `https://pokeapi.co/api/v2/pokemon/${array[2]}`;
 const _URL3 = `https://pokeapi.co/api/v2/pokemon/${array[3]}`;
 const _URL4 = `https://pokeapi.co/api/v2/pokemon/${array[4]}`;
 const _URL5 = `https://pokeapi.co/api/v2/pokemon/${array[5]}`;
+const URL =[`https://pokeapi.co/api/v2/pokemon/${array[0]}`,`https://pokeapi.co/api/v2/pokemon/${array[1]}`,`https://pokeapi.co/api/v2/pokemon/${array[2]}`,`https://pokeapi.co/api/v2/pokemon/${array[3]}`,`https://pokeapi.co/api/v2/pokemon/${array[4]}`,`https://pokeapi.co/api/v2/pokemon/${array[5]}`]
 
 
-mainContainer.children[0].addEventListener('click',()=>{
-  xhr.open('GET', _URL0);
+for(let i =0;i<6;i++){
+window.addEventListener('load',()=>{
+const xhr = new XMLHttpRequest();
+  xhr.open('GET', URL[i]);
   xhr.send();
     xhr.addEventListener('load', function () {
       const _PokeData = JSON.parse(xhr.response);
-      mainContainer.children[0].children[0].src = _PokeData.sprites.front_default;
-      
-      
-      //fetch(_URL).then((response)=> response.json()).then((data){img.src=data.sprites.front_default})
-    })  
-})
-mainContainer.children[1].addEventListener('click',()=>{
-  xhr.open('GET', _URL1);
-  xhr.send();
-    xhr.addEventListener('load', function () {
-      const _PokeData = JSON.parse(xhr.response);
-      mainContainer.children[1].children[0].src = _PokeData.sprites.front_default;
+      mainContainer.children[i].children[0].src = _PokeData.sprites.front_default;
+    })
       
       //fetch(_URL).then((response)=> response.json()).then((data){img.src=data.sprites.front_default})
-    })  
-})
-mainContainer.children[2].addEventListener('click',()=>{
-  xhr.open('GET', _URL2);
-  xhr.send();
-    xhr.addEventListener('load', function () {
-      const _PokeData = JSON.parse(xhr.response);
-      mainContainer.children[2].children[0].src = _PokeData.sprites.front_default;
-      
-      //fetch(_URL).then((response)=> response.json()).then((data){img.src=data.sprites.front_default})
-    })  
-})
-mainContainer.children[3].addEventListener('click',()=>{
-  xhr.open('GET', _URL3);
-  xhr.send();
-    xhr.addEventListener('load', function () {
-      const _PokeData = JSON.parse(xhr.response);
-      mainContainer.children[3].children[0].src = _PokeData.sprites.front_default;
-      
-      //fetch(_URL).then((response)=> response.json()).then((data){img.src=data.sprites.front_default})
-    })  
-})
-mainContainer.children[4].addEventListener('click',()=>{
-  xhr.open('GET', _URL4);
-  xhr.send();
-    xhr.addEventListener('load', function () {
-      const _PokeData = JSON.parse(xhr.response);
-      mainContainer.children[4].children[0].src = _PokeData.sprites.front_default;
-      
-      //fetch(_URL).then((response)=> response.json()).then((data){img.src=data.sprites.front_default})
-    })  
-})
-mainContainer.children[5].addEventListener('click',()=>{
-  xhr.open('GET', _URL5);
-  xhr.send();
-    xhr.addEventListener('load', function () {
-      const _PokeData = JSON.parse(xhr.response);
-      mainContainer.children[5].children[0].src = _PokeData.sprites.front_default;
-      
-      //fetch(_URL).then((response)=> response.json()).then((data){img.src=data.sprites.front_default})
-    })  
-})
-
-//mainContainer.children[0].addEventListener('load',async (e)=>{
-//  xhr.open('GET', _URL0);
-//  xhr.send();
-//    xhr.addEventListener('load', function () {
-//      const _PokeData = JSON.parse(xhr.response);
-//      e.target.children[0].src = _PokeData.sprites.front_default;
-//      
-//})
-//})
-//mainContainer.children[1].addEventListener('load',async (e)=>{
-//  xhr.open('GET', _URL1);
-//  xhr.send();
-//    xhr.addEventListener('load', function () {
-//      const _PokeData = JSON.parse(xhr.response);
-//      e.target.children[0].src = _PokeData.sprites.front_default;
-//      
-//})
-//})
+  })  
+  }
