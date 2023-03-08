@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <div id="randomContainer"></div>
+    <div id="mainContainer"></div>
+  </div>
+<script>
+// 양옆 버튼 만들기 randomContainer안에 *12시까지
+const randomContainer=document.getElementById('randomContainer');
+randomContainer.style.width="100vw"
+randomContainer.style.height="100vh"
+
+// id필요없으면 빼기
+function Maker(tagName,parent,setAttriName,setAttriValue,text){
+  const Element=document.createElement(tagName);
+  parent.appendChild(Element);
+  Element.setAttribute(setAttriName,setAttriValue);
+  Element.textContent=text;
+}
+// 1. 랜덤 사진
+let img=Maker('img',randomContainer,'id','img1')
+// let img2 =Maker('img',randomContainer,'id','img2')
+img1.style.width="200px";
+img1.style.height="200px";
+img1.style.marginLeft="40%";
+
+
+let num = Math.floor((Math.random() * 1008)) + 1
+const xhr = new XMLHttpRequest();
+const _URL = `https://pokeapi.co/api/v2/pokemon/${num}`;
+xhr.open('GET', _URL);
+xhr.send();
+xhr.addEventListener('load', function() {
+  // console.log(xhr.response);
+const _PokeData = JSON.parse(xhr.response);
+console.log(_PokeData);
+img1.src=_PokeData.sprites.front_default;
+  // img2.src=_PokeData.sprites.back_default;
+});
+// 2. 양옆 버튼 만들기
+let beforebutton=Maker('button',randomContainer,'id','before',"←")
+let nextbutton=Maker('button',randomContainer,'id','next',"→")
+function buttonStyles(buttonwidth, buttonheight, buttonposition,buttontop){
+  before.style.width=buttonwidth;
+  before.style.height=buttonheight;
+  before.style.position=buttonposition;
+  before.style.top=buttontop;
+  before.style.left="45%";
+  next.style.width=buttonwidth;
+  next.style.height=buttonheight;
+  next.style.position=buttonposition;
+  next.style.top=buttontop;
+  next.style.left="50%";
+  }
+  buttonStyles("30px","30px","absolute","250px");
+  
+
+
+
+const domElements={
+  before:document.getElementById('before'),
+  next:document.getElementById('next'),
+  img:document.getElementById('img1'),
+  // img2 : document.getElementById('img2') < 이미지 2를 추가해보고 , 
+  // 뒷화면 오류를 해결하려고 했었던듯 싶다.
+}
+
+//back_default
+domElements.img.addEventListener('mouseenter', function(){
+  domElements.img.style.border = "5px dotted orange";
+  document.getElementById('img1').src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${num}.png`;
+  // if(_PokeData.sprites.back_default ===null){
+  // 조건문이나 반복문으로 제어? 
+})
+domElements.img.addEventListener('mouseleave', function(){
+  domElements.img.style.border = "5px dotted black";
+  document.getElementById('img1').src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${num}.png`;
+})
+// 이전버튼 누르면 이전사진으로 이동
+domElements.before.addEventListener('click',function(){
+  document.getElementById('img1').src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${num}.png`;
+  num--;
+})
+// 다음버튼 누르면 다음사진으로 이동
+domElements.next.addEventListener('click',function(){
+  document.getElementById('img1').src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${num}.png`;
+  num++;
+})
+console.dir(root);
+  </script>
+</body>
+</html>
