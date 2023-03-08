@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {margin:0 ; padding :0; box-sizing:border-box;}
+
+    body{
+      overflow-x: hidden ;
+    }
+    header {
+      width: 100vw;
+      height: 100px;
+      background-color: #333;
+      /*포지션 fixed 를 통해서 브라우저 기준으로 고정 */
+      position : fixed;
+      top : 0;
+      /*flex set */
+      /*button 태그들을 간단히 가운데 정렬 */ 
+      display :flex ;
+      justify-content : center;
+      align-items:center;
+
+    }
+    header > button {
+      width: 200px;
+      height: 50px;
+      margin:10px;
+        }
+    #root{
+      width: 100vw;
+      height: 100vh;
+      background-color:#eee;
+       /*flex set */
+      display :flex ;
+      justify-content : center;
+      align-items:center;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <button id="plus">plus</button>
+  <button id="minus">minus</button>
+</header>
+<div id="root"></div>
+<script>
+  const domElements ={
+    plus : document.getElementById('plus'),
+    minus : document.getElementById('minus'),
+    root : document.getElementById('root'),
+  }
+  
+  /* 아래의 elementMaker함수는 두개의 paramater를 받도록 설계되었다.
+  1. 태그이름 === tagname 
+  2. 택스트값 ===textvalue
+  나머지 스타일링 관련 실행 구문은 리터럴이다 ( 표시정도로만 확인하기 위함 ) */
+  function elementamker(tagname,textvalue) {
+    const newElement = document.createElement(tagname);
+    newElement.textContent = textvalue ;
+    newElement.style.width = "100px";
+    newElement.style.height = "100px";
+    newElement.style.border = "1px solid blue";
+    return newElement;
+      
+    }
+  
+/* plus 라는 아이디를 가진 button 태그에 click 이벤트를 장착했다.
+이벤트가 발생하면 , elemenMaker 함수를 호출하고, 그결과값을  appendchild 메서드를 통해
+root 라는 아이디를 가진 div 태그의 자식으로 붙인다. */
+domElements.plus.addEventListener('click',function(){
+  let appendElement = elementamker('div', "동적으로 만드는 요소이다!");
+  domElements.root.appendChild(appendElement);
+});
+
+/* minus 라는 아이디에 장착한 이벤트는 한가지 조건이 있다.  root 라는 아이디를 가진 
+div 태그의 자식요소가 존재하는지 확인하고 . 존재한다면 그 첫번째 자식요소를 삭제해주는 로직
+(예제를 제작시 버그를 발견하여 조건을 장착함) */
+domElements.minus.addEventListener('click', function(){
+ if(domElements.root.firstElementChild !== null){
+  //root 라는 아이디를 가진 div 태그에 자식요소가 존재하지 않으면 !!! 참 true!!!
+  //여기서 null 이라는 데이터타입은 '존재하지 않는다 '라는 의미이다.
+let removeElement =domElements.root.firstElementChild;
+//첫번째 자식이라는 의미의 요소를 찾아서 romoveElement 라는 변수에 할당해줌.
+domElements.root.removeChild(removeElement);
+//append  덧붙이는 의미와 반대되는 appenChild 의 반대의미의 떼어내는 것이다.
+ }else {
+  alert("더이상 삭제할 요소가 없습니다.");
+  // 간단하게 알람을 통해 조작되지 않았을 때를 알려주는 형식으로 에러를 처리함 
+ 
+ }
+ 
+});
+
+
+
+</script>
+</body>
+</html>
