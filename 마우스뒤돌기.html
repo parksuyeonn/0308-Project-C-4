@@ -17,7 +17,6 @@ const randomContainer=document.getElementById('randomContainer');
 randomContainer.style.width="100vw"
 randomContainer.style.height="100vh"
 
-
 // id필요없으면 빼기
 function Maker(tagName,parent,setAttriName,setAttriValue,text){
   const Element=document.createElement(tagName);
@@ -26,8 +25,6 @@ function Maker(tagName,parent,setAttriName,setAttriValue,text){
   Element.textContent=text;
 }
 // 1. 랜덤 사진
-
-
 let img=Maker('img',randomContainer,'id','img1')
 // let img2 =Maker('img',randomContainer,'id','img2')
 img1.style.width="200px";
@@ -42,24 +39,24 @@ xhr.open('GET', _URL);
 xhr.send();
 xhr.addEventListener('load', function() {
   // console.log(xhr.response);
-  const _PokeData = JSON.parse(xhr.response);
-  console.log(_PokeData);
-  img1.src=_PokeData.sprites.front_default;
+const _PokeData = JSON.parse(xhr.response);
+console.log(_PokeData);
+img1.src=_PokeData.sprites.front_default;
   // img2.src=_PokeData.sprites.back_default;
 });
 // 2. 양옆 버튼 만들기
 let beforebutton=Maker('button',randomContainer,'id','before',"←")
 let nextbutton=Maker('button',randomContainer,'id','next',"→")
-function buttonStyles(buttonwidth, buttonheight, buttonposition,buttonleft){
+function buttonStyles(buttonwidth, buttonheight, buttonposition,buttontop){
   before.style.width=buttonwidth;
   before.style.height=buttonheight;
   before.style.position=buttonposition;
-  before.style.top=buttonleft;
+  before.style.top=buttontop;
   before.style.left="45%";
   next.style.width=buttonwidth;
   next.style.height=buttonheight;
   next.style.position=buttonposition;
-  next.style.top="250px";
+  next.style.top=buttontop;
   next.style.left="50%";
   }
   buttonStyles("30px","30px","absolute","250px");
@@ -71,17 +68,16 @@ const domElements={
   before:document.getElementById('before'),
   next:document.getElementById('next'),
   img:document.getElementById('img1'),
-  // img2 : document.getElementById('img2')
+  // img2 : document.getElementById('img2') < 이미지 2를 추가해보고 , 
+  // 뒷화면 오류를 해결하려고 했었던듯 싶다.
 }
 
 //back_default
-
 domElements.img.addEventListener('mouseenter', function(){
   domElements.img.style.border = "5px dotted orange";
   document.getElementById('img1').src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${num}.png`;
   // if(_PokeData.sprites.back_default ===null){
-
-  // }
+  // 조건문이나 반복문으로 제어? 
 })
 domElements.img.addEventListener('mouseleave', function(){
   domElements.img.style.border = "5px dotted black";
