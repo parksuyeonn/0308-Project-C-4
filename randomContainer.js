@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <div id="root">
-    <div id="randomContainer"></div>
-    <div id="mainContainer"></div>
-  </div>
-<script>
 const randomContainer=document.getElementById('randomContainer');
 
 function Maker(tagName,parent,setAttriName,setAttriValue,text){
@@ -84,5 +70,3 @@ console.dir(_PokeData)
 
 
 console.dir(root);
-  </script>
-</body>

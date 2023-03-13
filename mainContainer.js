@@ -27,7 +27,7 @@ function pokemonBoxStyle(w, h, bg, bor) {
     let pokemonBox = mainContainer.children[i];
     pokemonBox.style.width = w;
     pokemonBox.style.height = h;
-    pokemonBox.style.backgroundColor = bg
+    pokemonBox.style.backgroundColor = 
     pokemonBox.style.border = bor;
   }
 }
